@@ -345,6 +345,12 @@ if st.session_state.get("theme_radio") == "Light":
             color: #1E1E1E !important;
             border: 1px solid #D0D5DB !important;
         }
+        .stButton button[kind="secondary"],
+        .stButton button[kind="tertiary"] {
+            background-color: #FFFFFF !important;
+            color: #1E1E1E !important;
+            border: 1px solid #D0D5DB !important;
+        }
         .stButton button:disabled, [data-testid="stDownloadButton"] button:disabled {
             background-color: #F3F4F6 !important;
             color: #6B7280 !important;
@@ -387,10 +393,18 @@ if st.session_state.get("theme_radio") == "Light":
             border-color: #AAB2BD !important;
             background-color: #FFFFFF !important;
         }
+        [data-testid="stCheckbox"] [data-baseweb="checkbox"] > div {
+            border-color: #AAB2BD !important;
+            background-color: #FFFFFF !important;
+        }
         [data-testid="stCheckbox"] input:checked + div,
         [data-testid="stCheckbox"] div[role="checkbox"][aria-checked="true"] {
             background-color: #4A9EFF !important;
             border-color: #4A9EFF !important;
+        }
+        [data-testid="stCheckbox"] svg {
+            fill: #1E1E1E !important;
+            stroke: #1E1E1E !important;
         }
         [data-testid="stToggle"] [data-baseweb="switch"] > div {
             background-color: #D0D5DB !important;
@@ -409,6 +423,9 @@ if st.session_state.get("theme_radio") == "Light":
         [data-testid="stSlider"] [data-baseweb="slider"] > div,
         [data-testid="stSlider"] [data-baseweb="slider"] * {
             color: #1E1E1E !important;
+        }
+        [data-testid="stSlider"] [role="slider"] {
+            background-color: #4A9EFF !important;
         }
         /* Code blocks */
         code, pre {
@@ -1165,12 +1182,11 @@ def render_one(cfg: SubplotConfig, plot_idx: int):
                     st.session_state[fps_key] = max(6, min(30, st.session_state[fps_key]))
 
             c1, c2, c3 = st.columns(3)
-            fps = c1.slider("FPS", 6, 30, 16, key=f"anim_fps_{plot_idx}")
+            fps = c1.slider("FPS", 6, 30, key=f"anim_fps_{plot_idx}")
             max_frames = c2.slider(
                 "Max frames",
                 10,
                 max_frames_cap,
-                min(90, max(10, export_rows)),
                 key=f"anim_frames_{plot_idx}",
             )
             export_format = c3.selectbox(

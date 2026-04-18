@@ -220,14 +220,19 @@ if st.session_state.get("theme_radio") == "Light":
     st.markdown(
         """
         <style>
-        /* Main background + body text */
+        /* ===== CORE BACKGROUNDS & TEXT ===== */
+        html, body {
+            background-color: #FFFFFF !important;
+            color: #1E1E1E !important;
+        }
         [data-testid="stAppViewContainer"],
         [data-testid="stMain"],
         [data-testid="stHeader"] {
             background-color: #FFFFFF !important;
             color: #1E1E1E !important;
         }
-        /* Sidebar */
+        
+        /* ===== SIDEBAR ===== */
         [data-testid="stSidebar"] {
             background-color: #F5F7FA !important;
         }
@@ -236,26 +241,45 @@ if st.session_state.get("theme_radio") == "Light":
         }
         [data-testid="stSidebar"] [data-baseweb="select"] * {
             color: #1E1E1E !important;
+            background-color: #FFFFFF !important;
+            border-color: #D0D5DB !important;
         }
         [data-testid="stSidebar"] [data-baseweb="radio"] * {
             color: #1E1E1E !important;
         }
-        /* Top toolbar (Deploy / menu) */
-        [data-testid="stToolbar"],
+        [data-testid="stSidebar"] [data-baseweb="checkbox"] * {
+            color: #1E1E1E !important;
+        }
+        [data-testid="stSidebar"] input {
+            background-color: #FFFFFF !important;
+            color: #1E1E1E !important;
+            border-color: #D0D5DB !important;
+        }
+        
+        /* ===== TOP TOOLBAR ===== */
+        [data-testid="stToolbar"] {
+            background-color: transparent !important;
+        }
         [data-testid="stToolbar"] * {
             color: #1E1E1E !important;
             fill: #1E1E1E !important;
         }
         [data-testid="stToolbar"] button {
             background-color: #FFFFFF !important;
+            color: #1E1E1E !important;
             border: 1px solid #D0D5DB !important;
+        }
+        [data-testid="stToolbar"] button:hover {
+            background-color: #F5F7FA !important;
+            border-color: #4A9EFF !important;
         }
         [data-testid="stToolbar"] button:disabled {
             background-color: #F3F4F6 !important;
-            color: #6B7280 !important;
-            border-color: #D1D5DB !important;
+            color: #9CA3AF !important;
+            border-color: #E5E7EB !important;
         }
-        /* All readable text in the main area */
+        
+        /* ===== TEXT & HEADINGS ===== */
         [data-testid="stAppViewContainer"] p,
         [data-testid="stAppViewContainer"] h1,
         [data-testid="stAppViewContainer"] h2,
@@ -268,169 +292,243 @@ if st.session_state.get("theme_radio") == "Light":
         .stCaption, small {
             color: #1E1E1E !important;
         }
-        /* Subtle / muted text */
         .subtle, [data-testid="stCaptionContainer"] {
-            color: #666 !important;
+            color: #555 !important;
         }
-        /* Text input, text area, number input */
+        
+        /* ===== INPUT FIELDS ===== */
         [data-testid="stTextInput"] input,
         [data-testid="stTextArea"] textarea,
         [data-testid="stNumberInput"] input,
         [data-testid="stChatInput"] textarea {
             background-color: #FFFFFF !important;
             color: #1E1E1E !important;
-            border-color: #D0D5DB !important;
+            border: 1px solid #D0D5DB !important;
         }
-        /* Select box + multiselect */
+        [data-testid="stTextInput"] input:focus,
+        [data-testid="stTextArea"] textarea:focus,
+        [data-testid="stNumberInput"] input:focus {
+            border-color: #4A9EFF !important;
+            box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.1) !important;
+        }
+        
+        /* ===== SELECT & MULTISELECT ===== */
         [data-baseweb="select"] > div,
-        [data-baseweb="select"] div[role="button"] {
+        [data-baseweb="select"] div[role="button"],
+        [data-baseweb="select"] div[role="combobox"] {
             background-color: #FFFFFF !important;
             color: #1E1E1E !important;
             border-color: #D0D5DB !important;
+        }
+        [data-baseweb="select"] * {
+            color: #1E1E1E !important;
         }
         [data-baseweb="tag"] {
             background-color: #E0E4E9 !important;
             color: #1E1E1E !important;
         }
-        /* File uploader */
-        [data-testid="stFileUploader"] section {
-            background-color: #F7F9FC !important;
-            border: 1px dashed #B0B6BE !important;
+        [data-baseweb="tag"] svg {
+            fill: #1E1E1E !important;
         }
+        
+        /* ===== FILE UPLOADER ===== */
+        [data-testid="stFileUploader"] {
+            background-color: transparent !important;
+        }
+        [data-testid="stFileUploader"] section,
         [data-testid="stFileUploader"] [data-testid="stFileUploaderDropzone"] {
             background-color: #F7F9FC !important;
-            border: 1px dashed #B0B6BE !important;
+            border: 2px dashed #B0B6BE !important;
         }
         [data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] {
             background-color: #FFFFFF !important;
             border: 1px solid #D0D5DB !important;
         }
-        [data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] * {
+        [data-testid="stFileUploader"] * {
             color: #1E1E1E !important;
             fill: #1E1E1E !important;
         }
-        [data-testid="stFileUploader"] div {
-            color: #1E1E1E !important;
-        }
-        [data-testid="stFileUploader"] svg {
-            fill: #1E1E1E !important;
-        }
-        [data-testid="stFileUploader"] small,
         [data-testid="stFileUploader"] button {
+            background-color: #FFFFFF !important;
             color: #1E1E1E !important;
+            border: 1px solid #D0D5DB !important;
         }
-        /* Expanders */
+        
+        /* ===== EXPANDABLE SECTIONS ===== */
         [data-testid="stExpander"] {
             background-color: #F7F9FC !important;
             border: 1px solid #E0E4E9 !important;
-        }
-        [data-testid="stExpander"] summary {
-            background-color: #F7F9FC !important;
-            border-bottom: 1px solid #E0E4E9 !important;
+            border-radius: 4px !important;
         }
         [data-testid="stExpander"] summary,
         [data-testid="stExpander"] details {
             color: #1E1E1E !important;
         }
-        /* Metrics */
-        [data-testid="stMetric"] {
+        [data-testid="stExpander"] summary {
             background-color: #F7F9FC !important;
         }
-        [data-testid="stMetricValue"], [data-testid="stMetricLabel"] {
+        [data-testid="stExpander"] svg {
+            fill: #1E1E1E !important;
+            stroke: #1E1E1E !important;
+        }
+        
+        /* ===== METRICS ===== */
+        [data-testid="stMetric"] {
+            background-color: #F7F9FC !important;
+            border: 1px solid #E0E4E9 !important;
+        }
+        [data-testid="stMetricValue"],
+        [data-testid="stMetricLabel"],
+        [data-testid="stMetricDelta"] {
             color: #1E1E1E !important;
         }
-        /* Buttons (default + primary) */
-        .stButton button, [data-testid="stDownloadButton"] button {
+        
+        /* ===== BUTTONS ===== */
+        .stButton button,
+        [data-testid="stDownloadButton"] button,
+        button[kind="secondary"],
+        button[kind="tertiary"] {
             background-color: #FFFFFF !important;
             color: #1E1E1E !important;
             border: 1px solid #D0D5DB !important;
         }
-        .stButton button[kind="secondary"],
-        .stButton button[kind="tertiary"] {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
-            border: 1px solid #D0D5DB !important;
+        .stButton button:hover,
+        [data-testid="stDownloadButton"] button:hover {
+            background-color: #F5F7FA !important;
+            border-color: #4A9EFF !important;
         }
-        .stButton button:disabled, [data-testid="stDownloadButton"] button:disabled {
-            background-color: #F3F4F6 !important;
-            color: #6B7280 !important;
-            border-color: #D1D5DB !important;
-        }
-        .stButton button[kind="primary"] {
+        .stButton button[kind="primary"],
+        button[kind="primary"] {
             background-color: #4A9EFF !important;
             color: #FFFFFF !important;
             border-color: #4A9EFF !important;
         }
-        .stButton button:hover {
-            border-color: #4A9EFF !important;
+        .stButton button[kind="primary"]:hover {
+            background-color: #3589E0 !important;
+            border-color: #3589E0 !important;
         }
-        /* Tabs */
+        .stButton button:disabled,
+        [data-testid="stDownloadButton"] button:disabled,
+        button[kind="primary"]:disabled {
+            background-color: #F3F4F6 !important;
+            color: #9CA3AF !important;
+            border-color: #E5E7EB !important;
+        }
+        
+        /* ===== TABS ===== */
         .stTabs [data-baseweb="tab-list"] {
             background-color: transparent !important;
-            border-bottom: 1px solid #E0E4E9 !important;
+            border-bottom: 2px solid #E0E4E9 !important;
         }
         .stTabs [data-baseweb="tab"] {
             color: #1E1E1E !important;
         }
-        /* Alerts: info / success / warning / error */
+        .stTabs [data-baseweb="tab"][aria-selected="true"] {
+            color: #4A9EFF !important;
+            border-bottom-color: #4A9EFF !important;
+        }
+        
+        /* ===== ALERTS & INFO BOXES ===== */
         [data-testid="stAlert"] {
             color: #1E1E1E !important;
+            background-color: #F5F7FA !important;
         }
-        /* Data tables */
+        
+        /* ===== DATA TABLES ===== */
         [data-testid="stDataFrame"] {
             background-color: #FFFFFF !important;
         }
-        /* Slider / radio / checkbox labels */
-        [data-testid="stWidgetLabel"],
-        [data-testid="stRadio"] label,
-        [data-testid="stCheckbox"] label,
-        [data-testid="stSlider"] label {
+        [data-testid="stDataFrame"] * {
             color: #1E1E1E !important;
         }
-        /* Checkbox / toggle visual contrast */
-        [data-testid="stCheckbox"] input + div,
-        [data-testid="stCheckbox"] div[role="checkbox"] {
+        
+        /* ===== RADIO BUTTONS ===== */
+        [data-testid="stRadio"] {
+            background-color: transparent !important;
+        }
+        [data-testid="stRadio"] label {
+            color: #1E1E1E !important;
+        }
+        [data-testid="stRadio"] [data-baseweb="radio"] * {
+            color: #1E1E1E !important;
+        }
+        [data-testid="stRadio"] input[type="radio"] {
             border-color: #AAB2BD !important;
-            background-color: #FFFFFF !important;
+            accent-color: #4A9EFF !important;
         }
-        [data-testid="stCheckbox"] [data-baseweb="checkbox"] > div {
+        
+        /* ===== CHECKBOXES ===== */
+        [data-testid="stCheckbox"] {
+            background-color: transparent !important;
+        }
+        [data-testid="stCheckbox"] label {
+            color: #1E1E1E !important;
+        }
+        [data-testid="stCheckbox"] input[type="checkbox"] {
             border-color: #AAB2BD !important;
-            background-color: #FFFFFF !important;
+            accent-color: #4A9EFF !important;
         }
-        [data-testid="stCheckbox"] input:checked + div,
-        [data-testid="stCheckbox"] div[role="checkbox"][aria-checked="true"] {
-            background-color: #4A9EFF !important;
-            border-color: #4A9EFF !important;
+        [data-testid="stCheckbox"] [data-baseweb="checkbox"] {
+            background-color: transparent !important;
         }
-        [data-testid="stCheckbox"] svg {
+        [data-testid="stCheckbox"] [data-baseweb="checkbox"] * {
+            color: #1E1E1E !important;
             fill: #1E1E1E !important;
             stroke: #1E1E1E !important;
         }
-        [data-testid="stToggle"] [data-baseweb="switch"] > div {
+        
+        /* ===== TOGGLES (SWITCHES) ===== */
+        [data-testid="stToggle"] label {
+            color: #1E1E1E !important;
+        }
+        [data-testid="stToggle"] [data-baseweb="switch"] {
             background-color: #D0D5DB !important;
         }
         [data-testid="stToggle"] [data-baseweb="switch"] input:checked + div {
             background-color: #4A9EFF !important;
         }
-        [data-testid="stToggle"] label,
-        [data-testid="stCheckbox"] label {
-            color: #1E1E1E !important;
-        }
         [data-testid="stToggle"] [data-baseweb="switch"] * {
             color: #1E1E1E !important;
         }
-        /* Slider contrast in light mode */
-        [data-testid="stSlider"] [data-baseweb="slider"] > div,
+        
+        /* ===== SLIDERS ===== */
+        [data-testid="stSlider"] label {
+            color: #1E1E1E !important;
+        }
+        [data-testid="stSlider"] [data-baseweb="slider"] {
+            background-color: transparent !important;
+        }
         [data-testid="stSlider"] [data-baseweb="slider"] * {
             color: #1E1E1E !important;
+            fill: #4A9EFF !important;
+        }
+        [data-testid="stSlider"] input[type="range"] {
+            accent-color: #4A9EFF !important;
         }
         [data-testid="stSlider"] [role="slider"] {
             background-color: #4A9EFF !important;
         }
-        /* Code blocks */
-        code, pre {
+        
+        /* ===== CODE BLOCKS & PRE ===== */
+        code, pre, .stCode {
             background-color: #F0F2F6 !important;
             color: #1E1E1E !important;
+        }
+        [data-testid="stCode"] {
+            background-color: #F0F2F6 !important;
+        }
+        
+        /* ===== COLUMNS & CONTAINERS ===== */
+        [data-testid="column"] {
+            background-color: transparent !important;
+        }
+        
+        /* ===== MISC LABELS & TEXT ===== */
+        [data-testid="stWidgetLabel"] {
+            color: #1E1E1E !important;
+        }
+        span, div {
+            color: inherit !important;
         }
         </style>
         """,

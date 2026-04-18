@@ -220,315 +220,333 @@ if st.session_state.get("theme_radio") == "Light":
     st.markdown(
         """
         <style>
-        /* ===== CORE BACKGROUNDS & TEXT ===== */
-        html, body {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
+        :root {
+            --lt-bg: #EEF2F7;
+            --lt-sidebar: #E3E9F2;
+            --lt-surface: #FFFFFF;
+            --lt-surface-soft: #F7FAFF;
+            --lt-text: #152238;
+            --lt-muted: #5A677D;
+            --lt-border: #C7D1DF;
+            --lt-accent: #2D7EF0;
+            --lt-success-bg: #D7F0DF;
+            --lt-success-text: #1F6B3F;
         }
+
+        html, body,
+        [data-testid="stAppViewContainer"],
+        [data-testid="stMain"],
+        [data-testid="stSidebar"] {
+            color-scheme: light !important;
+        }
+
+        :root,
+        [data-testid="stAppViewContainer"],
+        [data-testid="stSidebar"] {
+            --primary-color: var(--lt-accent) !important;
+            --background-color: var(--lt-bg) !important;
+            --secondary-background-color: var(--lt-sidebar) !important;
+            --text-color: var(--lt-text) !important;
+        }
+
         [data-testid="stAppViewContainer"],
         [data-testid="stMain"],
         [data-testid="stHeader"] {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
+            background: var(--lt-bg) !important;
+            color: var(--lt-text) !important;
         }
-        
-        /* ===== SIDEBAR ===== */
+
         [data-testid="stSidebar"] {
-            background-color: #F5F7FA !important;
+            background: var(--lt-sidebar) !important;
+            color: var(--lt-text) !important;
         }
-        [data-testid="stSidebar"] * {
-            color: #1E1E1E !important;
-        }
-        [data-testid="stSidebar"] [data-baseweb="select"] * {
-            color: #1E1E1E !important;
-            background-color: #FFFFFF !important;
-            border-color: #D0D5DB !important;
-        }
-        [data-testid="stSidebar"] [data-baseweb="radio"] * {
-            color: #1E1E1E !important;
-        }
-        [data-testid="stSidebar"] [data-baseweb="checkbox"] * {
-            color: #1E1E1E !important;
-        }
-        [data-testid="stSidebar"] input {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
-            border-color: #D0D5DB !important;
-        }
-        
-        /* ===== TOP TOOLBAR ===== */
-        [data-testid="stToolbar"] {
-            background-color: transparent !important;
-        }
-        [data-testid="stToolbar"] * {
-            color: #1E1E1E !important;
-            fill: #1E1E1E !important;
-        }
-        [data-testid="stToolbar"] button {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
-            border: 1px solid #D0D5DB !important;
-        }
-        [data-testid="stToolbar"] button:hover {
-            background-color: #F5F7FA !important;
-            border-color: #4A9EFF !important;
-        }
-        [data-testid="stToolbar"] button:disabled {
-            background-color: #F3F4F6 !important;
-            color: #9CA3AF !important;
-            border-color: #E5E7EB !important;
-        }
-        
-        /* ===== TEXT & HEADINGS ===== */
-        [data-testid="stAppViewContainer"] p,
+
+        [data-testid="stSidebar"] *,
         [data-testid="stAppViewContainer"] h1,
         [data-testid="stAppViewContainer"] h2,
         [data-testid="stAppViewContainer"] h3,
         [data-testid="stAppViewContainer"] h4,
-        [data-testid="stAppViewContainer"] h5,
-        [data-testid="stAppViewContainer"] label,
+        [data-testid="stAppViewContainer"] p,
         [data-testid="stAppViewContainer"] li,
-        .stMarkdown, .stMarkdown p, .stMarkdown li,
-        .stCaption, small {
-            color: #1E1E1E !important;
+        [data-testid="stAppViewContainer"] label,
+        [data-testid="stWidgetLabel"] {
+            color: var(--lt-text) !important;
         }
-        .subtle, [data-testid="stCaptionContainer"] {
-            color: #555 !important;
-        }
-        
-        /* ===== INPUT FIELDS ===== */
+
         [data-testid="stTextInput"] input,
-        [data-testid="stTextArea"] textarea,
         [data-testid="stNumberInput"] input,
-        [data-testid="stChatInput"] textarea {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
-            border: 1px solid #D0D5DB !important;
+        [data-testid="stTextArea"] textarea,
+        [data-testid="stChatInput"] textarea,
+        [data-testid="stTimeInput"] input,
+        [data-testid="stSelectbox"] div[role="combobox"],
+        [data-testid="stMultiSelect"] div[role="combobox"],
+        [data-baseweb="select"] > div {
+            background: var(--lt-surface) !important;
+            color: var(--lt-text) !important;
+            border: 1px solid var(--lt-border) !important;
         }
+
         [data-testid="stTextInput"] input:focus,
+        [data-testid="stNumberInput"] input:focus,
         [data-testid="stTextArea"] textarea:focus,
-        [data-testid="stNumberInput"] input:focus {
-            border-color: #4A9EFF !important;
-            box-shadow: 0 0 0 2px rgba(74, 158, 255, 0.1) !important;
+        [data-testid="stSelectbox"] div[role="combobox"]:focus-within,
+        [data-testid="stMultiSelect"] div[role="combobox"]:focus-within {
+            border-color: var(--lt-accent) !important;
+            box-shadow: 0 0 0 2px rgba(45, 126, 240, 0.14) !important;
         }
-        
-        /* ===== SELECT & MULTISELECT ===== */
-        [data-baseweb="select"] > div,
-        [data-baseweb="select"] div[role="button"],
-        [data-baseweb="select"] div[role="combobox"] {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
-            border-color: #D0D5DB !important;
+
+        [data-baseweb="select"] svg,
+        [data-baseweb="tag"] svg,
+        [data-testid="stTextInput"] svg,
+        [data-testid="stNumberInput"] svg {
+            fill: var(--lt-text) !important;
+            stroke: var(--lt-text) !important;
         }
-        [data-baseweb="select"] * {
-            color: #1E1E1E !important;
-        }
+
         [data-baseweb="tag"] {
-            background-color: #E0E4E9 !important;
-            color: #1E1E1E !important;
+            background: #E1EAF8 !important;
+            color: var(--lt-text) !important;
         }
-        [data-baseweb="tag"] svg {
-            fill: #1E1E1E !important;
-        }
-        
-        /* ===== FILE UPLOADER ===== */
-        [data-testid="stFileUploader"] {
-            background-color: transparent !important;
-        }
-        [data-testid="stFileUploader"] section,
-        [data-testid="stFileUploader"] [data-testid="stFileUploaderDropzone"] {
-            background-color: #F7F9FC !important;
-            border: 2px dashed #B0B6BE !important;
-        }
-        [data-testid="stFileUploader"] [data-testid="stFileUploaderFile"] {
-            background-color: #FFFFFF !important;
-            border: 1px solid #D0D5DB !important;
-        }
-        [data-testid="stFileUploader"] * {
-            color: #1E1E1E !important;
-            fill: #1E1E1E !important;
-        }
-        [data-testid="stFileUploader"] button {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
-            border: 1px solid #D0D5DB !important;
-        }
-        
-        /* ===== EXPANDABLE SECTIONS ===== */
-        [data-testid="stExpander"] {
-            background-color: #F7F9FC !important;
-            border: 1px solid #E0E4E9 !important;
-            border-radius: 4px !important;
-        }
-        [data-testid="stExpander"] summary,
-        [data-testid="stExpander"] details {
-            color: #1E1E1E !important;
-        }
-        [data-testid="stExpander"] summary {
-            background-color: #F7F9FC !important;
-        }
-        [data-testid="stExpander"] svg {
-            fill: #1E1E1E !important;
-            stroke: #1E1E1E !important;
-        }
-        
-        /* ===== METRICS ===== */
-        [data-testid="stMetric"] {
-            background-color: #F7F9FC !important;
-            border: 1px solid #E0E4E9 !important;
-        }
-        [data-testid="stMetricValue"],
-        [data-testid="stMetricLabel"],
-        [data-testid="stMetricDelta"] {
-            color: #1E1E1E !important;
-        }
-        
-        /* ===== BUTTONS ===== */
+
         .stButton button,
         [data-testid="stDownloadButton"] button,
-        button[kind="secondary"],
-        button[kind="tertiary"] {
-            background-color: #FFFFFF !important;
-            color: #1E1E1E !important;
-            border: 1px solid #D0D5DB !important;
+        [data-testid="stToolbar"] button,
+        [data-testid="stTextInput"] button,
+        [data-testid="stNumberInput"] button {
+            background: var(--lt-surface) !important;
+            color: var(--lt-text) !important;
+            border: 1px solid var(--lt-border) !important;
         }
-        .stButton button:hover,
-        [data-testid="stDownloadButton"] button:hover {
-            background-color: #F5F7FA !important;
-            border-color: #4A9EFF !important;
+
+        /* Prevent vertical/wrapped text regressions on buttons. */
+        .stButton button,
+        [data-testid="stDownloadButton"] button {
+            white-space: nowrap !important;
+            writing-mode: horizontal-tb !important;
+            text-orientation: mixed !important;
+            letter-spacing: normal !important;
+            line-height: 1.25 !important;
+            min-width: 0 !important;
+            width: auto !important;
         }
-        .stButton button[kind="primary"],
-        button[kind="primary"] {
-            background-color: #4A9EFF !important;
+
+        .stButton button[kind="primary"] {
+            background: var(--lt-accent) !important;
             color: #FFFFFF !important;
-            border-color: #4A9EFF !important;
+            border-color: var(--lt-accent) !important;
         }
-        .stButton button[kind="primary"]:hover {
-            background-color: #3589E0 !important;
-            border-color: #3589E0 !important;
-        }
+
         .stButton button:disabled,
-        [data-testid="stDownloadButton"] button:disabled,
-        button[kind="primary"]:disabled {
-            background-color: #F3F4F6 !important;
-            color: #9CA3AF !important;
-            border-color: #E5E7EB !important;
+        [data-testid="stDownloadButton"] button:disabled {
+            background: #EDF2F8 !important;
+            color: #9AA6BA !important;
+            border-color: #D4DCE7 !important;
         }
-        
-        /* ===== TABS ===== */
-        .stTabs [data-baseweb="tab-list"] {
-            background-color: transparent !important;
-            border-bottom: 2px solid #E0E4E9 !important;
+
+        /* Ensure normal button icons don't get isolated bubble backgrounds. */
+        .stButton button span,
+        [data-testid="stDownloadButton"] button span {
+            background: transparent !important;
+            border: 0 !important;
+            border-radius: 0 !important;
+            width: auto !important;
+            height: auto !important;
+            display: inline !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            line-height: inherit !important;
         }
-        .stTabs [data-baseweb="tab"] {
-            color: #1E1E1E !important;
+
+        [data-baseweb="popover"],
+        [data-baseweb="menu"] {
+            background: var(--lt-surface) !important;
+            color: var(--lt-text) !important;
         }
-        .stTabs [data-baseweb="tab"][aria-selected="true"] {
-            color: #4A9EFF !important;
-            border-bottom-color: #4A9EFF !important;
+
+        [data-baseweb="menu"] [role="option"] {
+            background: var(--lt-surface) !important;
+            color: var(--lt-text) !important;
         }
-        
-        /* ===== ALERTS & INFO BOXES ===== */
-        [data-testid="stAlert"] {
-            color: #1E1E1E !important;
-            background-color: #F5F7FA !important;
+
+        [data-baseweb="menu"] [role="option"]:hover {
+            background: #E9F2FF !important;
         }
-        
-        /* ===== DATA TABLES ===== */
-        [data-testid="stDataFrame"] {
-            background-color: #FFFFFF !important;
+
+        [data-testid="stFileUploader"] [data-testid="stFileUploaderDropzone"] {
+            background: var(--lt-surface-soft) !important;
+            border: 2px dashed #AAB9CD !important;
         }
-        [data-testid="stDataFrame"] * {
-            color: #1E1E1E !important;
+
+        [data-testid="stFileUploader"] [data-testid="stFileUploaderDropzone"] * {
+            color: var(--lt-text) !important;
         }
-        
-        /* ===== RADIO BUTTONS ===== */
-        [data-testid="stRadio"] {
-            background-color: transparent !important;
+
+        [data-testid="stFileUploader"] [data-testid="stFileUploaderDropzone"] button,
+        [data-testid="stFileUploader"] [data-testid="stFileUploaderDropzone"] [role="button"],
+        [data-testid="stFileUploader"] [data-testid="stFileUploaderDropzone"] label {
+            background: var(--lt-surface) !important;
+            color: var(--lt-text) !important;
+            border: 1px solid var(--lt-border) !important;
         }
-        [data-testid="stRadio"] label {
-            color: #1E1E1E !important;
+
+        [data-testid*="stFileUploaderFile"],
+        [data-testid*="stFileUploaderFile"] > div,
+        [data-testid*="stFileUploaderFile"] > div > div,
+        [data-testid*="stFileUploaderFile"] span,
+        [data-testid*="stFileUploaderFile"] small,
+        [data-testid*="stFileUploaderFile"] button {
+            background: var(--lt-surface) !important;
+            background-image: none !important;
+            color: var(--lt-text) !important;
+            border-color: var(--lt-border) !important;
+            opacity: 1 !important;
         }
-        [data-testid="stRadio"] [data-baseweb="radio"] * {
-            color: #1E1E1E !important;
+
+        [data-testid*="stFileUploaderFile"] svg,
+        [data-testid="stFileUploader"] svg {
+            fill: var(--lt-text) !important;
+            stroke: var(--lt-text) !important;
         }
-        [data-testid="stRadio"] input[type="radio"] {
-            border-color: #AAB2BD !important;
-            accent-color: #4A9EFF !important;
+
+        [data-testid="stRadio"] input[type="radio"],
+        [data-testid="stCheckbox"] input[type="checkbox"],
+        [data-testid="stSidebar"] input[type="radio"],
+        [data-testid="stSidebar"] input[type="checkbox"] {
+            appearance: auto !important;
+            -webkit-appearance: auto !important;
+            accent-color: var(--lt-accent) !important;
         }
-        
-        /* ===== CHECKBOXES ===== */
-        [data-testid="stCheckbox"] {
-            background-color: transparent !important;
+
+        [data-baseweb="checkbox"] [role="checkbox"],
+        [data-baseweb="radio"] [role="radio"],
+        [data-baseweb="checkbox"] label > div:first-child,
+        [data-baseweb="radio"] label > div:first-child {
+            background: var(--lt-surface) !important;
+            border: 2px solid var(--lt-border) !important;
+            box-shadow: none !important;
         }
-        [data-testid="stCheckbox"] label {
-            color: #1E1E1E !important;
+
+        [data-baseweb="checkbox"] [role="checkbox"][aria-checked="true"],
+        [data-baseweb="radio"] [role="radio"][aria-checked="true"] {
+            background: var(--lt-accent) !important;
+            border-color: var(--lt-accent) !important;
         }
-        [data-testid="stCheckbox"] input[type="checkbox"] {
-            border-color: #AAB2BD !important;
-            accent-color: #4A9EFF !important;
+
+        [data-baseweb="checkbox"] [role="checkbox"] svg,
+        [data-baseweb="radio"] [role="radio"] svg {
+            fill: #FFFFFF !important;
+            stroke: #FFFFFF !important;
         }
-        [data-testid="stCheckbox"] [data-baseweb="checkbox"] {
-            background-color: transparent !important;
+
+        /* Strong fallback for Streamlit checkbox/radio widgets in light mode. */
+        [data-testid="stCheckbox"] [role="checkbox"],
+        [data-testid="stRadio"] [role="radio"] {
+            background: var(--lt-surface) !important;
+            border: 2px solid var(--lt-border) !important;
+            box-shadow: none !important;
+            color: var(--lt-text) !important;
         }
-        [data-testid="stCheckbox"] [data-baseweb="checkbox"] * {
-            color: #1E1E1E !important;
-            fill: #1E1E1E !important;
-            stroke: #1E1E1E !important;
+        [data-testid="stCheckbox"] [role="checkbox"][aria-checked="true"],
+        [data-testid="stRadio"] [role="radio"][aria-checked="true"] {
+            background: var(--lt-accent) !important;
+            border-color: var(--lt-accent) !important;
         }
-        
-        /* ===== TOGGLES (SWITCHES) ===== */
-        [data-testid="stToggle"] label {
-            color: #1E1E1E !important;
+        [data-testid="stCheckbox"] [role="checkbox"] svg,
+        [data-testid="stRadio"] [role="radio"] svg {
+            fill: #FFFFFF !important;
+            stroke: #FFFFFF !important;
         }
-        [data-testid="stToggle"] [data-baseweb="switch"] {
-            background-color: #D0D5DB !important;
+
+        [data-baseweb="switch"] [role="switch"],
+        [data-testid="stToggle"] [role="switch"] {
+            background: #99A8BE !important;
+            border: 1px solid #8F9CB1 !important;
+            min-width: 40px !important;
+            min-height: 22px !important;
+            opacity: 1 !important;
         }
-        [data-testid="stToggle"] [data-baseweb="switch"] input:checked + div {
-            background-color: #4A9EFF !important;
+
+        [data-baseweb="switch"] [role="switch"][aria-checked="true"],
+        [data-testid="stToggle"] [role="switch"][aria-checked="true"] {
+            background: var(--lt-accent) !important;
+            border-color: var(--lt-accent) !important;
         }
-        [data-testid="stToggle"] [data-baseweb="switch"] * {
-            color: #1E1E1E !important;
+
+        [data-baseweb="switch"] [role="switch"] > div,
+        [data-testid="stToggle"] [role="switch"] > div {
+            background: #FFFFFF !important;
         }
-        
-        /* ===== SLIDERS ===== */
-        [data-testid="stSlider"] label {
-            color: #1E1E1E !important;
-        }
-        [data-testid="stSlider"] [data-baseweb="slider"] {
-            background-color: transparent !important;
-        }
-        [data-testid="stSlider"] [data-baseweb="slider"] * {
-            color: #1E1E1E !important;
-            fill: #4A9EFF !important;
-        }
-        [data-testid="stSlider"] input[type="range"] {
-            accent-color: #4A9EFF !important;
-        }
+
         [data-testid="stSlider"] [role="slider"] {
-            background-color: #4A9EFF !important;
+            background: var(--lt-accent) !important;
         }
-        
-        /* ===== CODE BLOCKS & PRE ===== */
-        code, pre, .stCode {
-            background-color: #F0F2F6 !important;
-            color: #1E1E1E !important;
+
+        [data-testid="stSlider"] [data-baseweb="slider"] * {
+            color: var(--lt-text) !important;
         }
-        [data-testid="stCode"] {
-            background-color: #F0F2F6 !important;
+
+        [data-testid="stExpander"] {
+            background: var(--lt-panel) !important;
+            border: 1px solid #D3DCE8 !important;
         }
-        
-        /* ===== COLUMNS & CONTAINERS ===== */
-        [data-testid="column"] {
-            background-color: transparent !important;
+
+        [data-testid="stExpander"] summary,
+        [data-testid="stExpander"] summary > div,
+        [data-testid="stExpander"] summary * {
+            background: var(--lt-panel) !important;
+            color: var(--lt-text) !important;
         }
-        
-        /* ===== MISC LABELS & TEXT ===== */
-        [data-testid="stWidgetLabel"] {
-            color: #1E1E1E !important;
+
+        [data-testid="stAlert"] {
+            color: var(--lt-text) !important;
         }
-        span, div {
-            color: inherit !important;
+
+        [data-testid="stSidebar"] [data-testid="stAlert"] {
+            background: var(--lt-success-bg) !important;
+            color: var(--lt-success-text) !important;
+        }
+
+        [data-testid="stDataFrame"],
+        [data-testid="stCode"],
+        code,
+        pre {
+            background: var(--lt-surface) !important;
+            color: var(--lt-text) !important;
+        }
+
+        [data-testid="stTooltipIcon"] > button[aria-label*="help" i],
+        [data-testid="stTooltipIcon"] > button[title*="help" i] {
+            background: var(--lt-surface) !important;
+            color: var(--lt-muted) !important;
+            border: 1px solid var(--lt-border) !important;
+            border-radius: 999px !important;
+            width: 22px !important;
+            height: 22px !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            line-height: 1 !important;
+            font-weight: 600 !important;
+            opacity: 1 !important;
+        }
+
+        [data-testid="stTooltipIcon"] {
+            background: transparent !important;
+            width: auto !important;
+            height: auto !important;
+            display: inline-flex !important;
+            align-items: center !important;
+        }
+
+        [data-testid="stTooltipIcon"] > button[aria-label*="help" i] svg,
+        [data-testid="stTooltipIcon"] > button[title*="help" i] svg,
+        [data-testid="stTooltipIcon"] > button[aria-label*="help" i] path,
+        [data-testid="stTooltipIcon"] > button[title*="help" i] path,
+        [data-testid="stTooltipIcon"] > button[aria-label*="help" i] span,
+        [data-testid="stTooltipIcon"] > button[title*="help" i] span {
+            fill: var(--lt-muted) !important;
+            stroke: var(--lt-muted) !important;
+            color: var(--lt-muted) !important;
         }
         </style>
         """,
